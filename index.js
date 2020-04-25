@@ -190,7 +190,6 @@ function processDuplicateFree(list, callback) {
       return element;
     }
   });
-
   return callback(duplicate);
 }
 //
@@ -220,8 +219,13 @@ function processDuplicateFree(list, callback) {
  *
  * [2] Invoking `lowerCaseStrings` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
  */
-function lowerCaseStrings(/* code here */) {
-  /* code here */
+function lowerCaseStrings(strings) {
+  // ???return strings[i].toLowerCase();  why can't i just doi it this way???
+  var lowerCased = [];
+  for (var i = 0; i < strings.length; i++) {
+    lowerCased.push(strings[i].toLowerCase());
+  }
+  return lowerCased;
 }
 //
 //
@@ -247,8 +251,16 @@ function lowerCaseStrings(/* code here */) {
  *
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
  */
-function isItAnApple(/* code here */) {
-  /* code here */
+function isItAnApple(strings) {
+  var appleTrueOrFalse = [];
+  for (let i = 0; i < strings.length; i++) {
+    if ("apple" === strings[i]) {
+      appleTrueOrFalse.push(true);
+    } else {
+      appleTrueOrFalse.push(false);
+    }
+  }
+  return appleTrueOrFalse;
 }
 //
 //
@@ -275,8 +287,9 @@ function isItAnApple(/* code here */) {
  *
  * [2] Invoking `removeApple` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
  */
-function removeApple(/* code here */) {
-  /* code here */
+function removeApple(strings) {
+  const appleTrueOrFalse = strings.filter((fruits) => fruits !== "apple");
+  return appleTrueOrFalse;
 }
 //
 //
@@ -302,8 +315,11 @@ function removeApple(/* code here */) {
  *
  * [2] Invoking `stringSmash` with `['a', 'b', 'c' ]` will return `abc`.
  */
-function stringSmash(/* code here */) {
-  /* code here */
+function stringSmash(strings) {
+  const joinedStrings = strings.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+  return joinedStrings;
 }
 //
 //
@@ -329,8 +345,14 @@ function stringSmash(/* code here */) {
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
  */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
+
+//  ??? why not array[i].last_name???  how can you just access the key of the object without going throught the array index first???
+function getFullNames(runners) {
+  let runnerNames = [];
+  runners.forEach((i) => {
+    runnerNames.push(i.last_name + i.first_name);
+  });
+  return runnerNames;
 }
 //
 //
@@ -353,8 +375,12 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
  */
-function firstNamesAllCaps(/* CODE HERE */) {
-  /* CODE HERE */
+function firstNamesAllCaps(runners) {
+  let runnerNames = [];
+  runners.forEach((i) => {
+    runnerNames.push(i.first_name.toUpperCase());
+  });
+  return runnerNames;
 }
 //
 //
@@ -379,8 +405,16 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
  */
-function getRunnersByTShirtSize(/* CODE HERE */) {
-  /* CODE HERE */
+// ??? if .filter already returns an array why do we still have to .push???
+function getRunnersByTShirtSize(runners, tShirtSize) {
+  let runnersByshirtSize = [];
+  runners.filter((i) => {
+    if (i.shirt_size == tShirtSize) {
+      return runnersByshirtSize.push(i.first_name + " " + i.last_name);
+    }
+  });
+
+  return runnersByshirtSize;
 }
 //
 //
@@ -402,8 +436,14 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
  */
-function tallyUpDonations(/* CODE HERE */) {
-  /* CODE HERE */
+function tallyUpDonations(runners) {
+  // const donations = runners.reduce(
+  //   (accumulator, currentValue) => accumulator + currentValue.donation, 0);
+  //   return donations;
+  return runners.reduce(
+    (accumulator, current) => accumulator + current.donation,
+    0
+  );
 }
 //
 //
