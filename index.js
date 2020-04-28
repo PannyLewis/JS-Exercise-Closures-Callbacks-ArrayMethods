@@ -468,17 +468,21 @@ function tallyUpDonations(runners) {
  *
  * 1. What is the difference between counter1 and counter2?
  *    Counter 1 has a local variable and an inner function.
- *    Counter 2 has a global variable, and takes less steps.
+ *    Counter 2 has a global variable, has not innter function.
  *
  * 2. Which of the two uses a closure? How can you tell?
  *    Counter 1 uses a closure because it has an inner function.
  *
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better?
- *      We want o use closures when we have multiple global variables
- *      You want global variable when:  we need it to be accessible to all functions on the same page.
- *      You want a local variable when:  when it is only used within that function and not needed       anywhere else;  once it is used, it is not kept in memory and saves space.
- *      You want a closure when:
- *      You want no closure when:
+ *    Counter1 is preferable when you have a busy webpage with too many global variables that can get mixed   up and confused.  By enclosing the variable "let count = 0;", no other functions can get to it, so it is kind of a safegard for hiding/reserving that data.  Also, if you have too many global variables, that will take up memory space and make your program run slower.  We want o use closures when we have multiple global variables.  You want global variable when we need it to be accessible to all functions on the same page.
+ *    Counter2 is better when you need some flexibility for using the variable in a different function or use the function with another variable or both. You want a local variable when when it is only used within that function and not needed       anywhere else;  once it is used, it is not kept in memory and saves space.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 // counter1 code
