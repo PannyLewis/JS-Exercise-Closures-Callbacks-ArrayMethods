@@ -226,7 +226,11 @@ function lowerCaseStrings(strings) {
     lowerCased.push(strings[i].toLowerCase());
   }
   return lowerCased;
+  // for (var i = 0; i < strings.length; i++) {
+  //   console.log(strings[i].toLowerCase());
+  // }
 }
+console.log(lowerCaseStrings(["Orange", "APPLE", "banana", "mAnGo"]));
 //
 //
 //
@@ -346,11 +350,11 @@ function stringSmash(strings) {
  * The full names appear in the array in the same order the runners appear in the `runners` array.
  */
 
-//  ??? why not array[i].last_name???  how can you just access the key of the object without going throught the array index first???
+//  ??? why not array[i].last_name???  how can you just access the key of the object without going throught the array index first???  item is the item at that index of the array
 function getFullNames(runners) {
   let runnerNames = [];
-  runners.forEach((i) => {
-    runnerNames.push(i.last_name + i.first_name);
+  runners.forEach((item) => {
+    runnerNames.push(`${item.last_name}, ${item.first_name}`);
   });
   return runnerNames;
 }
@@ -407,15 +411,14 @@ function firstNamesAllCaps(runners) {
  */
 // ??? if .filter already returns an array why do we still have to .push???
 function getRunnersByTShirtSize(runners, tShirtSize) {
-  let runnersByshirtSize = [];
-  runners.filter((i) => {
-    if (i.shirt_size == tShirtSize) {
-      return runnersByshirtSize.push(i.first_name + " " + i.last_name);
-    }
-  });
-
+  const runnersByshirtSize = runners.filter(
+    (runner) => runner.shirt_size == tShirtSize
+  );
   return runnersByshirtSize;
 }
+
+// const appleTrueOrFalse = strings.filter((fruits) => fruits !== "apple");
+//   return appleTrueOrFalse;
 //
 //
 //
@@ -464,11 +467,18 @@ function tallyUpDonations(runners) {
  * Study the code for counter1 and counter2. Answer the questions below.
  *
  * 1. What is the difference between counter1 and counter2?
+ *    Counter 1 has a local variable and an inner function.
+ *    Counter 2 has a global variable, and takes less steps.
  *
  * 2. Which of the two uses a closure? How can you tell?
+ *    Counter 1 uses a closure because it has an inner function.
  *
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better?
- *
+ *      We want o use closures when we have multiple global variables
+ *      You want global variable when:  we need it to be accessible to all functions on the same page.
+ *      You want a local variable when:  when it is only used within that function and not needed       anywhere else;  once it is used, it is not kept in memory and saves space.
+ *      You want a closure when:
+ *      You want no closure when:
  */
 
 // counter1 code
@@ -480,6 +490,7 @@ function counterMaker() {
 }
 
 const counter1 = counterMaker();
+// console.log(counterMaker()());
 
 // counter2 code
 let count = 0;
@@ -517,9 +528,29 @@ function counter2() {
  * counter() // should return 0
  * etc
  */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
+function counterMakerWithLimit(maxValue) {
+  // set the initial count to 0
+  let count = 0;
+  // make a function that's going to increment count with an if condition
+  return function counter() {
+    //  as the count get increment, once it reaches the maximum value, display 0
+    if (count > maxValue) {
+      count = 0;
+    }
+    return count++;
+  };
 }
+
+const counter = counterMakerWithLimit(3);
+counter(); // should return 0 first run it 0 + 0 = 0
+counter(); // should return 1 2nd run 0 = 1 = 1
+counter(); // should return 2 3rd run 1 + 1 = 2
+counter(); // should return 3 4th run 2 + 1 = 3
+counter(); // should return 0 5th run 3 + 1 = 4 and 4 > 3 so it display 0
+counter(); // should return 1 5th run last number was 0 so 0 + 1
+counter(); // should return 2
+counter(); // should return 3
+counter(); // should return 0
 
 /////////////// END OF CHALLENGE ///////////////
 /////////////// END OF CHALLENGE ///////////////
